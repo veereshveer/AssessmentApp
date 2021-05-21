@@ -1,1 +1,20 @@
-<p>admin-login works!</p>
+<div class="container-fluid text-center " style="margin-top:100px;width:530px;background-color:;padding:30px;">
+    <h1>Admin Login</h1>
+    <form class="form-horizontal">
+        <p class='error-msg'></p>
+
+        <div class="form-group">
+            <div class="input-group" style="padding:7px">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" class="form-control input-sm" name="username"  maxlength="10" required pattern="[A-Za-z0-9]*" placeholder="Username" autocomplete="off" title="Enter your username"/>
+            </div> 
+            <div class="input-group" style="padding:7px">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control input-sm" placeholder="Enter your password" name="password" minlength="5" title="minimum 5 characters" required autocomplete="off"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" name="adLogin" class='btn btn-primary' value="LOGIN"/>
+        </div>
+    </form>
+</div>
