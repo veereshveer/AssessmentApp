@@ -1,0 +1,41 @@
+.header {
+    border: 1px solid black;
+    background-color:rgb(71, 98, 107);
+}
+
+.logo {
+    height: 103px;
+}
+
+.project-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+:host {
+    background-color: rgb(73, 73, 75);
+}
+
+.sidebar-btn {
+    transition-duration: 0.4s;
+    color: white;
+    margin: 5px;
+    width: 120px;
+    text-align: justify;
+    border: 2px solid rgb(71, 98, 107);
+}
+
+.navigation-menu a {
+    width: 100%;
+    color: white;
+}
+
+.navigation-menu.active {
+    background-color: gray;
+}
+
+H3 {
+    background-color: rgb(71, 98, 107);
+    border: black;
+    text-align: center;
+    color: white;
+}

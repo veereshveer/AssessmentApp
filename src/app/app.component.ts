@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AssessmentApp';
+  title = 'Online Assessment Application';
+  navigationMenu = [
+    {'name': 'Home', 'route': ''},
+    {'name': 'Settings', 'route': 'settings'},
+    {'name': 'Result', 'route': 'result'},
+    {'name': 'Links', 'route': 'links'}
+  ];
 }
