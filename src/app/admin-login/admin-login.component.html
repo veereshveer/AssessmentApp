@@ -1,6 +1,6 @@
 <div class="container-fluid text-center " style="margin-top:100px;width:530px;padding:30px;">
     <h1>Admin Login</h1>
-    <form [formGroup]="login1" (ngSubmit)="test()" class="form-horizontal">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal">
         <p class='error-msg'></p>
 
         <div class="form-group">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" [disabled]="!login1.valid" name="login" class='btn btn-primary' value="LOGIN"/>
+            <input type="submit" [disabled]="!loginForm.valid" name="login" class='btn btn-primary' value="LOGIN"/>
         </div>
     </form>
 </div>

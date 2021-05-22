@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-login',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
+
+  login(){
+    
+  }
+
+  loginForm = this.fb.group({
+    adminEmail: ['',{
+      validators:[
+        Validators.required,
+        Validators.email
+        
+      ]  
+    }],
+    adminPassword: ['',{
+      validators:[
+        Validators.required,
+        Validators.minLength(5)
+      ]  
+    }]
+  });
 
 }
