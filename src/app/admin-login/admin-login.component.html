@@ -1,1 +1,30 @@
-<p>admin-login works!</p>
+<div class="container-fluid text-center " style="margin-top:100px;width:530px;padding:30px;">
+    <h1>Admin Login</h1>
+    <form [formGroup]="login1" (ngSubmit)="test()" class="form-horizontal">
+        <p class='error-msg'></p>
+
+        <div class="form-group">
+            <div class="input-group" style="padding:7px">
+                <input type="email" 
+                    class="form-control input-sm" 
+                    formControlName="adminEmail"
+                    name="adminEmail"  
+                    placeholder="Email" 
+                    autocomplete="off" 
+                    title="Enter your Email"/>
+            </div> 
+            <div class="input-group" style="padding:7px">
+                <input type="password" 
+                    class="form-control input-sm" 
+                    formControlName="adminPassword"
+                    placeholder="Password" 
+                    name="adminPassword" 
+                    title="Enter your Password" 
+                    autocomplete="off"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" [disabled]="!login1.valid" name="login" class='btn btn-primary' value="LOGIN"/>
+        </div>
+    </form>
+</div>
