@@ -6,12 +6,19 @@
     margin-top:6%;
     width: 60%;
     color: rgb(10, 8, 7);
-    font-size:x-large;
+    font-size:large;
     border: 0;
     border-bottom: 2px solid rgb(10, 8, 7);
 }
 
 #assessmentName{
+    margin-top:6%;
+    border: 0;
+    border-bottom: 2px solid rgb(10, 8, 7);
+    width: 50%;
+}
+
+#question{
     margin-top:6%;
     border: 0;
     border-bottom: 2px solid rgb(10, 8, 7);
@@ -24,6 +31,10 @@
 }
 
 #addAsmnt{
+    margin-right: 3%;
+}
+
+#deleteAsmnt{
     margin-right: 30%;
 }
 
