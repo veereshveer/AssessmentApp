@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminHomeService } from './admin-home.service';
 
 @Component({
@@ -7,51 +8,113 @@ import { AdminHomeService } from './admin-home.service';
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
-  public assessmentName : String ='';
-  public assessments : any = [];
-  public questionTypes : any = [];
-  public assessmentBlock : String = 'd-none';
-  public questionBlock : String = 'd-none';
-  public questionType : String ='' ;
+  public listAssessmentName: String = '';
+  public NewAssessmentName: String = '';
+  public assessments: any = [];
+  public questionTypes: any = [];
+  public assessment : any = [];
+  public assessmentBlock: String = 'd-none';
+  public questionBlock: String = 'd-none';
+  public questionType: String = '';
+  public assessmentRadio: String = '';
+  public assessmentForm: FormGroup;
+  public submitted = false;
 
-  constructor(private homeService:AdminHomeService) { 
+  constructor(private homeService: AdminHomeService, private validation: FormBuilder) {
     let self = this;
+    this.assessmentForm = self.validation.group({
+    })
     self.fetchAssessment();
   }
 
   ngOnInit(): void {
+    let self = this;
+    self.assessmentForm = self.validation.group({
+      assessmentName: ["", [Validators.required]],
+      assessmentActive: ["", [Validators.required]],
+      assessmentId: ["",]
+    })
+  }
+  onReset() {
+    let self = this;
+    self.submitted = false;
+    self.assessmentForm.reset();
+  }
+
+  get h() {
+    return this.assessmentForm.controls;
   }
 
   fetchAssessment() {
     let self = this;
     self.homeService.getAssessment()
       .subscribe((response) => {
+        console.log(response);
         self.assessments = response;
       }, (err) => {
         console.log(err);
       })
   }
 
-  newAssessment(){
+  newAssessment() {
     let self = this;
     self.assessmentBlock = '';
   }
 
-  addAssessment(){
+  saveAssessment() {
     let self = this;
-    self.questionBlock ='';
+    if (this.assessmentForm.value.assessmentId !== '') {
+      self.editAssessment();
+    }
+    else {
+      self.addAssessment();
+    }
+  }
+
+  addAssessment() {
+    this.questionBlock = '';
+    let self = this;
     self.homeService.postAssessment(
       {
-        "assessmentName" :self.assessmentName
+        "assessmentName": self.assessmentForm.value.assessmentName,
+        "active": self.assessmentForm.value.assessmentActive
       }
     ).subscribe((response) => {
-        self.questionBlock ='';
-        self.homeService.getQuestionType()
+      self.assessment=response
+      self.assessmentForm.value.assessmentId = self.assessment.assessmentId;
+      self.homeService.getQuestionType()
         .subscribe((response) => {
           self.questionTypes = response;
         }, (err) => {
           console.log(err);
-        })   
+        })
+
+    }, (err) => {
+      console.log(err);
+    })
+  }
+
+  editAssessment() {
+    console.log(this.assessmentForm.value);
+    let self = this;
+    self.homeService.putAssessment(
+      {
+        "assessmentName": self.assessmentForm.value.assessmentName,
+        "active": self.assessmentForm.value.assessmentActive,
+        "assessmentId": self.assessmentForm.value.assessmentId
+      }
+    ).subscribe((response) => {
+      console.log(response);
+    }, (err) => {
+      console.log(err);
+    })
+  }
+
+  deleteAssessment(id: number) {
+    let self = this;
+    self.homeService.deleteAssessment(id)
+      .subscribe((response) => {
+        self.questionTypes = response;
       }, (err) => {
         console.log(err);
       })

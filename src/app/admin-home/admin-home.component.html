@@ -3,32 +3,50 @@
     <div class="col-lg-6 col-md-6">
         <button class="btn btn-primary btn-md fa-pull-right" id="addassessment" (click)="newAssessment()"> Add
             Assessment</button>
-        <select class="button custom-select " name="assessmentName" [(ngModel)]="assessmentName" id="assessmentName">
+        <select class="button custom-select " name="listAssessmentName" [(ngModel)]="listAssessmentName"
+            id="listAssessmentName">
             <option selected>Open this select menu</option>
-            <option *ngFor="let assessment of assessments" value="{{assessment.assessmentId}}">"Assessment.name"
+            <option *ngFor="let assessment of assessments" value="{{assessment.assessmentId}}">
+                {{assessment.assessmentName}}
             </option>
         </select>
         <div class="addAssessment {{assessmentBlock}}">
             <div class="row">
-                <input type="text" class="" name="assessmentName" id="assessmentName"
-                    placeholder="New assessment name" />
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive"
-                        checked>
-                    <label class="custom-control-label" for="defaultChecked">Active</label>
-                    <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive">
-                    <label class="custom-control-label" for="defaultChecked">In active</label>
-                </div>
+                <form class="form-group" [formGroup]="assessmentForm">
+                    <div class="form-group">
+                        <input type="text" formControlName="assessmentName"
+                            [ngClass]="{'is-invalid': submitted && h.assessmentName.errors }" name="assessmentName"
+                            id="assessmentName" placeholder="New assessment name" />
+                        <div *ngIf="h.assessmentName.touched && h.assessmentName.errors" class="text-danger">
+                            <div *ngIf="h.assessmentName.errors.required">
+                                Assessment name is requried
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-radiox">
+                        <input type="radio" class="custom-control-input " id="assessmentActive" name="assessmentActive"
+                            formControlName="assessmentActive" value="1" checked>
+                        <label class="custom-control-label" for="defaultChecked">Active</label>
+                        <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive"
+                            formControlName="assessmentActive" value="0">
+                        <label class="custom-control-label" for="defaultChecked">In active</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="assessmentId" id="assessmentId" formControlName="assessmentId" />
+                    </div>
+                </form>
             </div>
-            <button class="btn btn-primary btn-md fa-pull-right" id="addAsmnt" (click)="addAssessment()"> Add</button>
+            <button class="btn btn-danger btn-md fa-pull-right" id="deleteAsmnt"
+                (click)="deleteAssessment(2)">Delete</button>
+            <button class="btn btn-primary btn-md fa-pull-right" id="addAsmnt" (click)="saveAssessment()"> Add</button>
         </div>
         <div class="col-lg-12 col-md-12 {{questionBlock}}">
-            <input type="text" class="" name="assessmentName" id="assessmentName" placeholder="Enter the Question " />
+            <input type="text" class="" name="question" id="question" placeholder="Enter the Question " />
             <select class="button questionType-select  fa-pull-right" name="questionType" [(ngModel)]="questionType"
                 id="questionType">
                 <option selected>Select question type</option>
                 <option *ngFor="let questionType of questionTypes" value="{{questionType.questionTypeId}}">
-                    questionType.name </option>
+                    {{questionType.questionType}} </option>
             </select>
         </div>
     </div>
