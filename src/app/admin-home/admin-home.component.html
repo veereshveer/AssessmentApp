@@ -1,1 +1,35 @@
-<p>admin-home works!</p>
+<div class="row">
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-6 col-md-6">
+        <button class="btn btn-primary btn-md fa-pull-right" id="addassessment" (click)="newAssessment()"> Add
+            Assessment</button>
+        <select class="button custom-select " name="assessmentName" [(ngModel)]="assessmentName" id="assessmentName">
+            <option selected>Open this select menu</option>
+            <option *ngFor="let assessment of assessments" value="{{assessment.assessmentId}}">"Assessment.name"
+            </option>
+        </select>
+        <div class="addAssessment {{assessmentBlock}}">
+            <div class="row">
+                <input type="text" class="" name="assessmentName" id="assessmentName"
+                    placeholder="New assessment name" />
+                <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive"
+                        checked>
+                    <label class="custom-control-label" for="defaultChecked">Active</label>
+                    <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive">
+                    <label class="custom-control-label" for="defaultChecked">In active</label>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-md fa-pull-right" id="addAsmnt" (click)="addAssessment()"> Add</button>
+        </div>
+        <div class="col-lg-12 col-md-12 {{questionBlock}}">
+            <input type="text" class="" name="assessmentName" id="assessmentName" placeholder="Enter the Question " />
+            <select class="button questionType-select  fa-pull-right" name="questionType" [(ngModel)]="questionType"
+                id="questionType">
+                <option selected>Select question type</option>
+                <option *ngFor="let questionType of questionTypes" value="{{questionType.questionTypeId}}">
+                    questionType.name </option>
+            </select>
+        </div>
+    </div>
+</div>
