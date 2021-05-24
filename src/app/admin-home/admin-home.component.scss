@@ -18,7 +18,21 @@
     width: 50%;
 }
 
-#question{
+.option{
+    margin-top:2%;
+    border: 0;
+    border-bottom: 1px solid rgb(10, 8, 7);
+    width: 30%;
+}
+
+.answer{
+    margin-top:2%;
+    border: 0;
+    border-bottom: 1px solid rgb(10, 8, 7);
+    width: 30%;
+}
+
+.question{
     margin-top:6%;
     border: 0;
     border-bottom: 2px solid rgb(10, 8, 7);
@@ -44,4 +58,8 @@
     color: rgb(10, 8, 7);
     border: 0;
     border-bottom: 2px solid rgb(10, 8, 7);
+}
+
+.bottom{
+    margin-bottom: 10%;
 }

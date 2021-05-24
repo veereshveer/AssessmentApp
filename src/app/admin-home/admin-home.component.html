@@ -3,10 +3,9 @@
     <div class="col-lg-6 col-md-6">
         <button class="btn btn-primary btn-md fa-pull-right" id="addassessment" (click)="newAssessment()"> Add
             Assessment</button>
-        <select class="button custom-select " name="listAssessmentName" [(ngModel)]="listAssessmentName"
-            id="listAssessmentName">
-            <option selected>Open this select menu</option>
-            <option *ngFor="let assessment of assessments" value="{{assessment.assessmentId}}">
+        <select class="button custom-select " (change)="loadAssessmentDetails($event)" name="listAssessmentName"
+            [(ngModel)]="listAssessmentName" id="listAssessmentName">
+            <option *ngFor="let assessment of assessments" value=" {{assessment.assessmentId}}">
                 {{assessment.assessmentName}}
             </option>
         </select>
@@ -40,14 +39,34 @@
                 (click)="deleteAssessment(2)">Delete</button>
             <button class="btn btn-primary btn-md fa-pull-right" id="addAsmnt" (click)="saveAssessment()"> Add</button>
         </div>
-        <div class="col-lg-12 col-md-12 {{questionBlock}}">
-            <input type="text" class="" name="question" id="question" placeholder="Enter the Question " />
-            <select class="button questionType-select  fa-pull-right" name="questionType" [(ngModel)]="questionType"
-                id="questionType">
-                <option selected>Select question type</option>
+        <div class="col-lg-12 col-md-12   {{questionBlock}}" *ngFor=" let repeat of questionDivBlock; let i = index;">
+            <input type="text" class="question" name="question{{i}}" id="question{{i}}" placeholder="Enter the Question " />
+            <select class="button questionType-select  fa-pull-right" (change)="selectedQuestionType($event)"
+                name="questionType{{i}}" [(ngModel)]="questionType" id="questionType{{i}}">
                 <option *ngFor="let questionType of questionTypes" value="{{questionType.questionTypeId}}">
                     {{questionType.questionType}} </option>
             </select>
+            <div class="form-group" *ngIf="questionType == '1'">
+                <input type="text" class="answer" name="answer{{i}}" id="answer{{i}}" placeholder="Enter Short Answer" />
+            </div>
+            <div class="form-group" *ngIf="questionType != '1'">
+                <input type="text" class="option" name="oneOptionName{{i}}" (change)="loadAnswers($event)" id="oneOptionName{{i}}"
+                    placeholder="Enter options" />
+                <input type="text" class="option" name="twoOptionName{{i}}" (change)="loadAnswers($event)" id="twoOptionName{{i}}"
+                    placeholder="Enter options" />
+                <input type="text" class="option" name="threeOptionName{{i}}" (change)="loadAnswers($event)" id="threeOptionName{{i}}"
+                    placeholder="Enter options" /><br>
+                <input type="text"class="option" name="fourOptionName{{i}}" (change)="loadAnswers($event)" id="fourOptionName{{i}}"
+                    placeholder="Enter options" /><br><br>
+                <select class="button answer-select " name="questionType{{i}}" [(ngModel)]="questionType" id="questionType{{i}}">
+                    <option *ngFor="let answer of answers" value="{{answer}}">
+                        {{answer}} </option>
+                </select>
+                </div>
+                <button class="btn btn-danger btn-md fa-pull-right" id="deleteQuestion{{i}}" name="deleteQuestion{{i}}"
+                    (click)="deleteQuestion(2)">Delete</button>
+                <button class="btn btn-primary btn-md fa-pull-right bottom" id="addQuestion{{i}}" name="addQuestion{{i}}" (click)="saveQuestion()"> Add
+                </button>
         </div>
     </div>
 </div>

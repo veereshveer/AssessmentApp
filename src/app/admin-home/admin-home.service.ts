@@ -20,6 +20,7 @@ export class AdminHomeService {
     let self = this;
     return self.http.post(self.assessmentUrl, data);
   }
+  
   putAssessment = (data: any) => {
     let self = this;
     return self.http.put(self.assessmentUrl, data);
@@ -35,4 +36,8 @@ export class AdminHomeService {
     return self.http.delete(self.assessmentUrl + id);
   }
 
+  getAllAssessment = (id : any) => {
+    let self = this;
+    return self.http.get(self.questionTypeUrl+"getAll" + id);
+  }
 }

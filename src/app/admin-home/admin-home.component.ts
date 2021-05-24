@@ -12,16 +12,20 @@ export class AdminHomeComponent implements OnInit {
   public NewAssessmentName: String = '';
   public assessments: any = [];
   public questionTypes: any = [];
-  public assessment : any = [];
+  public assessment: any = [];
   public assessmentBlock: String = 'd-none';
   public questionBlock: String = 'd-none';
   public questionType: String = '';
   public assessmentRadio: String = '';
   public assessmentForm: FormGroup;
   public submitted = false;
+  public answers : any ;
+  public questionCount : number = 1;
+  public questionDivBlock : any =[this.questionCount];
 
   constructor(private homeService: AdminHomeService, private validation: FormBuilder) {
     let self = this;
+    self.answers =[];
     this.assessmentForm = self.validation.group({
     })
     self.fetchAssessment();
@@ -58,7 +62,14 @@ export class AdminHomeComponent implements OnInit {
 
   newAssessment() {
     let self = this;
-    self.assessmentBlock = '';
+    self.assessmentBlock = '';    
+    self.questionBlock = '';
+    self.homeService.getQuestionType()
+    .subscribe((response) => {
+      self.questionTypes = response;
+    }, (err) => {
+      console.log(err);
+    })
   }
 
   saveAssessment() {
@@ -80,7 +91,7 @@ export class AdminHomeComponent implements OnInit {
         "active": self.assessmentForm.value.assessmentActive
       }
     ).subscribe((response) => {
-      self.assessment=response
+      self.assessment = response
       self.assessmentForm.value.assessmentId = self.assessment.assessmentId;
       self.homeService.getQuestionType()
         .subscribe((response) => {
@@ -88,7 +99,6 @@ export class AdminHomeComponent implements OnInit {
         }, (err) => {
           console.log(err);
         })
-
     }, (err) => {
       console.log(err);
     })
@@ -120,4 +130,35 @@ export class AdminHomeComponent implements OnInit {
       })
   }
 
+  loadAssessmentDetails(event: any) {
+   console.log(event.target.value);
+    let self = this;
+    self.homeService.getAllAssessment(event.target.value)
+      .subscribe((response) => {
+        self.questionTypes = response;
+      }, (err) => {
+        console.log(err);
+      })
+  }
+
+  selectedQuestionType(selectedType : any){
+    let self = this;
+    self.questionType =selectedType.target.value;
+  }
+
+  loadAnswers(option : any){
+    let self = this;
+   self.answers.push(option.target.value);
+  }
+
+  saveQuestion(){
+    let self = this;
+    self.questionDivBlock.push(++self.questionCount);
+  }
+
+  deleteQuestion(id:number){
+    let self = this;
+    self.questionDivBlock.push(--self.questionCount);
+
+  }
 }
