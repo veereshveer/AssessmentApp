@@ -9,7 +9,12 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Adminhome1Component } from './adminhome1/adminhome1.component';
+import AdminService from './admin-login/admin.service';
+import { AuthInterCeptor } from './interceptor/auth.interceptor';
+import { AuthenticationGuardGuard } from './guard/authentication-guard.guard';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminLoginComponent,
     HeaderComponent,
     FooterComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    Adminhome1Component
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [AdminService, AuthenticationGuardGuard,
+              { provide: HTTP_INTERCEPTORS, useClass: AuthInterCeptor, multi: true }
+             ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
