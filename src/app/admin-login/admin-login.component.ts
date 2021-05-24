@@ -27,7 +27,7 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
         (response) => {
           console.log(response.jwt);
           this.adminService.addTokenToCache(response.jwt)
-          this.router.navigateByUrl('/adminHome');
+          this.router.navigateByUrl('');
         }, 
         error => {
           console.log("Incorrect username and password");
