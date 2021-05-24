@@ -49,4 +49,9 @@ export default class AdminService {
     }
     return false;
   }
+  logOut():boolean{
+    localStorage.removeItem('token');
+    return true;
+  }
 }
+
