@@ -10,11 +10,9 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Adminhome1Component } from './adminhome1/adminhome1.component';
 import AdminService from './admin-login/admin.service';
 import { AuthInterCeptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuardGuard } from './guard/authentication-guard.guard';
-import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -24,8 +22,7 @@ import { SettingsComponent } from './settings/settings.component';
     HeaderComponent,
     FooterComponent,
     AdminHomeComponent,
-    Adminhome1Component,
-    SettingsComponent
+    
   ],
   imports: [
     BrowserModule,
