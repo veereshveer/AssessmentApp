@@ -6,22 +6,33 @@ import { Injectable } from '@angular/core';
 })
 export class AdminHomeService {
 
-  constructor( private http:HttpClient) { }
-  private url="";
-  
+  constructor(private http: HttpClient) { }
+
+  private assessmentUrl = "http://localhost:8082/assessment/";
+  private questionTypeUrl = "http://localhost:8082/questionType/";
+
   getAssessment = () => {
     let self = this;
-    return self.http.get(self.url);
+    return self.http.get(self.assessmentUrl);
   }
 
-  postAssessment = (data : any) => {
+  postAssessment = (data: any) => {
     let self = this;
-    return self.http.post(self.url , data);
+    return self.http.post(self.assessmentUrl, data);
+  }
+  putAssessment = (data: any) => {
+    let self = this;
+    return self.http.put(self.assessmentUrl, data);
   }
 
   getQuestionType = () => {
     let self = this;
-    return self.http.get(self.url);
+    return self.http.get(self.questionTypeUrl);
+  }
+
+  deleteAssessment = (id: any) => {
+    let self = this;
+    return self.http.delete(self.assessmentUrl + id);
   }
 
 }

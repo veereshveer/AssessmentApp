@@ -14,6 +14,7 @@ import { Adminhome1Component } from './adminhome1/adminhome1.component';
 import AdminService from './admin-login/admin.service';
 import { AuthInterCeptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuardGuard } from './guard/authentication-guard.guard';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AuthenticationGuardGuard } from './guard/authentication-guard.guard';
     HeaderComponent,
     FooterComponent,
     AdminHomeComponent,
-    Adminhome1Component
+    Adminhome1Component,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
