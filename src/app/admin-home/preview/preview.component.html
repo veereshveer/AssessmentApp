@@ -1,265 +1,72 @@
 <div class="row">
-    <div class="col-lg-8 col-md-8"></div>
-    <div class="col-lg-1">
-      <button class="btn btn-outline-dark btn-md fa-pull-right" id="preview" (click)="preview()">
-        <a class="fas fa-eye"> Preview</a>
-      </button>
+    <div *ngFor="let assessment of assessments; let i = index;">
+        <div *ngIf="i==0">
+            <h3>{{assessment.assessment.assessmentName}}</h3>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card" id="question-margin">
+                    <div class="container">
+                        <form #questionTest="ngForm" novalidate>
+                            <div>{{assessment.questions}}</div>
+                            <div class="alert alert-danger" *ngIf="assessment.mandatory == true">
+                                <div>Name is required.</div>
+                            </div>
+                            <div class="form-group " *ngIf="assessment.questionType.questionTypeId == 1">
+                                <div class="col-md-9 col-form-label"
+                                    *ngFor="let options of assessment.options; let i = index;">
+                                    <div class="form-check form-check-inline mr-1">
+                                        <input class="form-check-input" type="radio" name="ques.selected"
+                                            value="{{ options.optionName}}" />
+                                        <label class="form-check-label">a) {{ options.optionName }} </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" *ngIf="assessment.questionType.questionTypeId == 2">
+                                <div class="col-md-9 col-form-label"
+                                    *ngFor="let options of assessment.options; let i = index;">
+                                    <div class="form-check form-check-inline mr-1">
+                                        <input class="form-check-input" type="checkbox" name="checks.selected"
+                                            value="a" />
+                                        <label class="form-check-label">a) {{options.optionName}} </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="assessment.questionType.questionTypeId == 3">
+                                <textarea id="textbox"></textarea>
+                            </div>
+                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 4">
+                                <div>
+                                    <select class="form-control">
+                                        <option selected>Select Answers</option>
+                                        <option *ngFor="let options of assessment.options; let i = index;"
+                                            value="{{options.optionName}}">{{options.optionName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 5">
+                                <div>
+
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 6">
+
+                            </div>
+                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 7">
+                                <div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2"></div>
+                            <div class="col-lg-8 col-md-8 buttons">
+                                <button class="btn btn-primary ">Previous</button>
+                                <button class="btn btn-success fa-pull-right">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <br />
-  <div class="row" *ngIf="!isCollapsed">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-      <div class="card">
-        <p class="no.ofQ"></p>
-        <div>Total no.of Questions:</div>
-        <div class="card" id="question-margin">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" id="fas">
-                <a class="fas fa-trash hover" style="padding-right: 10px"> </a>
-                <a class="fa fa-clone hover" style="padding-right: 10px"> </a>
-              </div>
-            </div>
-            <form #questionTest="ngForm" novalidate>
-              <div *ngFor="let ques of allQuestions">
-                <div>{{ ques.question }}</div>
-                <div class="form-group row">
-                  <div class="col-md-9 col-form-label">
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="{{ ques.id }}"
-                        value="a"
-                        [(ngModel)]="ques.selected"
-                      />
-                      <label class="form-check-label">a) {{ ques.a }} </label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="{{ ques.id }}"
-                        value="b"
-                        [(ngModel)]="ques.selected"
-                      />
-                      <label class="form-check-label">b) {{ ques.b }}</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="{{ ques.id }}"
-                        value="c"
-                        [(ngModel)]="ques.selected"
-                      />
-                      <label class="form-check-label">c){{ ques.c }}</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="{{ ques.id }}"
-                        value="d"
-                        [(ngModel)]="ques.selected"
-                      />
-                      <label class="form-check-label">d){{ ques.d }}</label>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-              </div>
-            </form>
-            <div class="row">
-              <div class="col-12" style="justify-content: center; display: flex">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  (click)="HomePage()"
-                  style="margin-right: 30px"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <!--    ----------------  checkbox card -----------------------             -->
-        <div class="card" id="question-margin">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" id="fas">
-                <!-- <a class="fas fa-edit hover" style="padding-right: 10px"></a> -->
-                <a class="fas fa-trash hover" style="padding-right: 10px"> </a>
-                <a class="fa fa-clone hover" style="padding-right: 10px"> </a>
-              </div>
-            </div>
-            <form #questionTest="ngForm" novalidate>
-              <div *ngFor="let checks of checkboxList">
-                <div>{{ checks.question }}</div>
-                <div class="form-group row">
-                  <div class="col-md-9 col-form-label">
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="{{ checks.id }}"
-                        value="a"
-                        [(ngModel)]="checks.selected"
-                        (change)="onCheckboxChange($event)"
-                      />
-                      <label class="form-check-label">a) {{ checks.a }} </label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="{{ checks.id }}"
-                        value="b"
-                        [(ngModel)]="checks.selected"
-                        (change)="onCheckboxChange($event)"
-                      />
-                      <label class="form-check-label">b){{ checks.b }}</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="{{ checks.id }}"
-                        value="c"
-                        [(ngModel)]="checks.selected"
-                        (change)="onCheckboxChange($event)"
-                      />
-                      <label class="form-check-label">c){{ checks.c }}</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="{{ checks.id }}"
-                        value="d"
-                        [(ngModel)]="checks.selected"
-                        (change)="onCheckboxChange($event)"
-                      />
-                      <label class="form-check-label">d){{ checks.d }}</label>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-              </div>
-            </form>
-            <div class="row">
-              <div class="col-12" style="justify-content: center; display: flex">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  (click)="HomePage()"
-                  style="margin-right: 30px"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card" id="question-margin">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" id="fas">
-                <a
-                  class="fas fa-trash hover"
-                  style="padding-right: 10px"
-                  (click)="delete()"
-                >
-                </a>
-                <a class="fa fa-clone hover" style="padding-right: 10px"> </a>
-              </div>
-            </div>
-            <Label>2. Which department ?</Label>
-            <div class="panel panel-primary">
-              <div class="panel-heading"></div>
-              <div class="panel-body">
-                <!-- <ng-multiselect-dropdown
-                  [placeholder]="'Summary '"
-                  [settings]="dropdownSettings"
-                  [data]="dropdownList"
-                  (onSelect)="onItemSelect($event)"
-                  (onSelectAll)="onSelectAll($event)"
-                >
-                </ng-multiselect-dropdown> -->
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="card" id="question-margin">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" id="fas">
-                <!-- <a class="fas fa-edit hover" style="padding-right: 10px"> </a> -->
-                <a class="fas fa-trash hover" style="padding-right: 10px"> </a>
-                <a class="fa fa-clone hover" style="padding-right: 10px"> </a>
-              </div>
-            </div>
-            <form  [formGroup]="form1" >
-              <div *ngFor="let text of textArea">
-                <div>{{ text.question }}</div>
-              <div>
-                <textarea id= "textbox" formControlName="textAnswers"></textarea>
-               </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="card" id="question-margin">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" id="fas">
-                <!-- <a class="fas fa-edit hover" style="padding-right: 10px"> </a> -->
-                <a class="fas fa-trash hover" style="padding-right: 10px"> </a>
-                <a class="fa fa-clone hover" style="padding-right: 10px"> </a>
-              </div>
-            </div>
-            <div class="container">
-              <form [formGroup]="form" (ngSubmit)="submit()">
-                <div class="form-group">
-                  <label for="website">Dropdown :</label>
-                  <select formControlName="website" class="form-control" (change)="changedropSelect($event)">
-                    <option disabled>Select Answers</option>
-                    <option>Choose Answers</option>
-                    <option *ngFor="let drop of dropList">{{ drop }}</option>
-                  </select>
-                  <div
-                    *ngIf="f.dropSelect.touched && f.dropSelect.invalid"
-                    class="alert alert-danger"
-                  >
-                    <div *ngIf="f.dropSelect.errors">Name is required.</div>
-                  </div>
-                </div>
-        
-                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
-                  Edit
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+</div>
