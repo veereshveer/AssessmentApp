@@ -1,1 +1,51 @@
-<p>user-registration works!</p>
+<div id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form class="form" id="userForm" [formGroup]="userForm" (ngSubmit)="saveUser()">
+                        <h3 class="text-center ">Register Form</h3>
+                        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                            <input type="text" class="form-control" formControlName="userName"
+                                [ngClass]="{'is-invalid': submitted && h.userName.errors }" name="userName"
+                                id="userName" placeholder="Provide full User name" />
+                            <div *ngIf="h.userName.touched && h.userName.errors" class="text-danger">
+                                <div *ngIf="h.userName.errors.required">
+                                    User name is requried
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                            <input formControlName="emailId" [ngClass]="{'is-invalid': submitted && h.emailId.errors }"
+                                type="email" name="email" id="email" class="form-control"
+                                placeholder="Provide email id" />
+                            <div *ngIf="h.emailId.touched && h.emailId.errors" class="text-danger">
+                                <div *ngIf="h.emailId.errors.required">
+                                    Email id is requried
+                                </div>
+                                <div *ngIf="h.emailId.errors.email">Email must be a valid</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                            <input formControlName="phoneNumber"
+                                [ngClass]="{'is-invalid': submitted && h.phoneNumber.errors }" type="text"
+                                name="phoneNumber" id="phoneNumber" class="form-control"
+                                placeholder="Provide Phone Number" />
+                            <div *ngIf="h.phoneNumber.touched && h.phoneNumber.errors" class="text-danger">
+                                <div *ngIf="h.phoneNumber.errors.required">
+                                    Phone number is requried
+                                </div>
+                                <div *ngIf="h.phoneNumber.errors.minlength">Phone number must be a valid</div>
+                                <div *ngIf="h.phoneNumber.errors.maxlength">Phone number must be a valid</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                            <button type="submit" class="btn btn-primary fa-pull-right">Take
+                                Test</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
