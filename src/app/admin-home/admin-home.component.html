@@ -1,72 +1,87 @@
-<div class="row">
-    <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-6 col-md-6">
-        <button class="btn btn-primary btn-md fa-pull-right" id="addassessment" (click)="newAssessment()"> Add
-            Assessment</button>
-        <select class="button custom-select " (change)="loadAssessmentDetails($event)" name="listAssessmentName"
-            [(ngModel)]="listAssessmentName" id="listAssessmentName">
-            <option *ngFor="let assessment of assessments" value=" {{assessment.assessmentId}}">
-                {{assessment.assessmentName}}
-            </option>
-        </select>
-        <div class="addAssessment {{assessmentBlock}}">
+<h1>veeresh</h1>
+<div class="container p-3">
+  <div class="row">
+    <div class="col-12">
+      
+      <form [formGroup]="form" (submit)="submit()">
+        <div class="card">
+        
+          <div class="card-body">
             <div class="row">
-                <form class="form-group" [formGroup]="assessmentForm">
-                    <div class="form-group">
-                        <input type="text" formControlName="assessmentName"
-                            [ngClass]="{'is-invalid': submitted && h.assessmentName.errors }" name="assessmentName"
-                            id="assessmentName" placeholder="New assessment name" />
-                        <div *ngIf="h.assessmentName.touched && h.assessmentName.errors" class="text-danger">
-                            <div *ngIf="h.assessmentName.errors.required">
-                                Assessment name is requried
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-control custom-radiox">
-                        <input type="radio" class="custom-control-input " id="assessmentActive" name="assessmentActive"
-                            formControlName="assessmentActive" value="1" checked>
-                        <label class="custom-control-label" for="defaultChecked">Active</label>
-                        <input type="radio" class="custom-control-input" id="assessmentActive" name="assessmentActive"
-                            formControlName="assessmentActive" value="0">
-                        <label class="custom-control-label" for="defaultChecked">In active</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="assessmentId" id="assessmentId" formControlName="assessmentId" />
-                    </div>
-                </form>
+              <label>Assessment</label>
+              <select class="form-control" type="text" formControlName="assessmentId"
+                  id="listAssessmentName" required>
+                  <option value="">Select Assessment</option>
+                  <option *ngFor="let assessment of assessments" value=" {{assessment.assessmentId}}">
+                      {{assessment.assessmentName}}
+                  </option>
+              </select>
             </div>
-            <button class="btn btn-danger btn-md fa-pull-right" id="deleteAsmnt"
-                (click)="deleteAssessment(2)">Delete</button>
-            <button class="btn btn-primary btn-md fa-pull-right" id="addAsmnt" (click)="saveAssessment()"> Add</button>
-        </div>
-        <div class="col-lg-12 col-md-12   {{questionBlock}}" *ngFor=" let repeat of questionDivBlock; let i = index;">
-            <input type="text" class="question" name="question{{i}}" id="question{{i}}" placeholder="Enter the Question " />
-            <select class="button questionType-select  fa-pull-right" (change)="selectedQuestionType($event)"
-                name="questionType{{i}}" [(ngModel)]="questionType" id="questionType{{i}}">
-                <option *ngFor="let questionType of questionTypes" value="{{questionType.questionTypeId}}">
-                    {{questionType.questionType}} </option>
-            </select>
-            <div class="form-group" *ngIf="questionType == '1'">
-                <input type="text" class="answer" name="answer{{i}}" id="answer{{i}}" placeholder="Enter Short Answer" />
-            </div>
-            <div class="form-group" *ngIf="questionType != '1'">
-                <input type="text" class="option" name="oneOptionName{{i}}" (change)="loadAnswers($event)" id="oneOptionName{{i}}"
-                    placeholder="Enter options" />
-                <input type="text" class="option" name="twoOptionName{{i}}" (change)="loadAnswers($event)" id="twoOptionName{{i}}"
-                    placeholder="Enter options" />
-                <input type="text" class="option" name="threeOptionName{{i}}" (change)="loadAnswers($event)" id="threeOptionName{{i}}"
-                    placeholder="Enter options" /><br>
-                <input type="text"class="option" name="fourOptionName{{i}}" (change)="loadAnswers($event)" id="fourOptionName{{i}}"
-                    placeholder="Enter options" /><br><br>
-                <select class="button answer-select " name="questionType{{i}}" [(ngModel)]="questionType" id="questionType{{i}}">
-                    <option *ngFor="let answer of answers" value="{{answer}}">
-                        {{answer}} </option>
-                </select>
+          </div>
+          <div class="card-header">Question</div>
+          <div class="card-body" formArrayName="questions">
+            <div class="row">
+              <div class="col-6" *ngFor="let question of questionFormGroup.controls; let i = index;">
+                <div [formGroupName]="i" class="row">
+                  <div class="form-group col-6">
+                    <label>Question Type</label>
+                    <select class="form-control" formControlName="questionType"  #questionTypeId (change)="loadQuestionType($event)" type="text">
+                      <option disabled value="">Select Question Type</option>
+                      <option value="1">Radio</option>
+                      <option value="2">CheckBox</option>
+                      <option value="3">Shortans</option>
+                      <option value="4">Dropdown</option>
+                      <option value="5">LinearScale</option>
+                      <option value="6">Date</option>
+                      <option value="7">Time</option>
+                      <!-- <option *ngFor="let questionsType of questionsTypes" [value]="questionsType.questionTypeId">
+                        {{questionsType.questionType}}
+                      </option> -->
+                    </select>
+                  </div>
+
+                  <div class="form-group col-6">
+                    <label>Question Name</label>
+                    <input class="form-control" formControlName="questionName" type="text">
+                    <span class="text-danger" *ngIf="getQuestionsFormGroup(i).controls['questionName'].touched && getQuestionsFormGroup(i).controls['questionName'].hasError('required')">
+                      Label is required! </span>
+                  </div>
+
+                  <div *ngIf="questionTypeId.value === '2'  || questionTypeId.value === '4' || questionTypeId.value === '1'">
+                    <div class="form-group-12">
+                        <label>Options</label><br>
+                        <input type="text" class="form-control"  formControlName="option1" placeholder="Option One"/><br><br>
+                        <input type="text" class="form-control"  formControlName="option2" placeholder="Option Two"/><br><br>
+                        <input type="text" class="form-control"  formControlName="option3" placeholder="Option Three"/><br><br>
+                        <input type="text" class="form-control"  formControlName="option4" placeholder="Option Four"/><br><br>
+                    </div>
+                  </div>
+                  
+                  <div>
+                      <div class="form-group col-12">
+                          <label>Answer.</label>
+                          <input class="form-control" formControlName="answer" type="text">
+                          <span class="text-danger" *ngIf="getQuestionsFormGroup(i).controls['answer'].touched && getQuestionsFormGroup(i).controls['answer'].hasError('required')">
+                              Answer field is required</span>
+                      </div>
+                  </div>
+        
+                  <div class="form-group col-12 text-right">
+                      <button class="btn btn-success" [disabled]="getQuestionsFormGroup(i).invalid" type="button" (click)="insertQuestion(i)"> Save </button>&nbsp;
+                      <button class="btn btn-success" type="button" (click)="cloneQuestion(i)"> Clone </button>&nbsp;
+                      <button class="btn btn-danger" type="button" (click)="removeQuestion(i)"> Remove </button>
+                  </div>
                 </div>
-                <button class="btn btn-danger btn-md fa-pull-right" id="deleteQuestion{{i}}" name="deleteQuestion{{i}}"
-                    (click)="deleteQuestion(2)">Delete</button>
-                <button class="btn btn-primary btn-md fa-pull-right bottom" id="addQuestion{{i}}" name="addQuestion{{i}}" (click)="saveQuestion()"> Add
-                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="col-12">
+              <button class="btn btn-primary m-1" type="button" (click)="addQuestion()"> Add Question </button>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>

@@ -18,6 +18,7 @@ export class AdminHomeService {
 
   postAssessment = (data: any) => {
     let self = this;
+    console.log(data);
     return self.http.post(self.assessmentUrl, data);
   }
   

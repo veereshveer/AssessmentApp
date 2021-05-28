@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { PreviewService } from './preview.service';
 
 @Component({
@@ -8,7 +7,7 @@ import { PreviewService } from './preview.service';
   styleUrls: ['./preview.component.scss']
 })
 export class PreviewComponent implements OnInit {
-
+ 
   isQuestionCardShow: boolean = false;
   dropdownList: any = [];
   public assessments: any = [];
@@ -37,7 +36,7 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-}
+  }
+  
 
 

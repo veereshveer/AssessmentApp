@@ -1,72 +1,73 @@
+<h1>veeresh</h1>
 <div class="row">
-    <div *ngFor="let assessment of assessments; let i = index;">
-        <div *ngIf="i==0">
-            <h3>{{assessment.assessment.assessmentName}}</h3>
-        </div>
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card" id="question-margin">
-                    <div class="container">
-                        <form #questionTest="ngForm" novalidate>
-                            <div>{{assessment.questions}}</div>
-                            <div class="alert alert-danger" *ngIf="assessment.mandatory == true">
-                                <div>Name is required.</div>
-                            </div>
-                            <div class="form-group " *ngIf="assessment.questionType.questionTypeId == 1">
-                                <div class="col-md-9 col-form-label"
-                                    *ngFor="let options of assessment.options; let i = index;">
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="radio" name="ques.selected"
-                                            value="{{ options.optionName}}" />
-                                        <label class="form-check-label">a) {{ options.optionName }} </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row" *ngIf="assessment.questionType.questionTypeId == 2">
-                                <div class="col-md-9 col-form-label"
-                                    *ngFor="let options of assessment.options; let i = index;">
-                                    <div class="form-check form-check-inline mr-1">
-                                        <input class="form-check-input" type="checkbox" name="checks.selected"
-                                            value="a" />
-                                        <label class="form-check-label">a) {{options.optionName}} </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="assessment.questionType.questionTypeId == 3">
-                                <textarea id="textbox"></textarea>
-                            </div>
-                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 4">
-                                <div>
-                                    <select class="form-control">
-                                        <option selected>Select Answers</option>
-                                        <option *ngFor="let options of assessment.options; let i = index;"
-                                            value="{{options.optionName}}">{{options.optionName}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 5">
-                                <div>
+  <div *ngFor="let assessment of assessments; let i = index;">
+      <div *ngIf="i==0">
+          <h3>{{assessment.assessment.assessmentName}}</h3>
+      </div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+          <div class="card">
+              <div class="card" id="question-margin">
+                  <div class="container">
+                      <form  novalidate>
+                          <div>{{assessment.questions}}</div>
+                          <div class="alert alert-danger" *ngIf="assessment.mandatory == true">
+                              <div>Name is required.</div>
+                          </div>
+                          <div class="form-group " *ngIf="assessment.questionType.questionTypeId == 1">
+                              <div class="col-md-9 col-form-label"
+                                  *ngFor="let options of assessment.options; let i = index;">
+                                  <div class="form-check form-check-inline mr-1">
+                                      <input class="form-check-input" type="radio" name="ques.selected"
+                                          value="{{ options.optionName}}" />
+                                      <label class="form-check-label">a) {{ options.optionName }} </label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group row" *ngIf="assessment.questionType.questionTypeId == 2">
+                              <div class="col-md-9 col-form-label"
+                                  *ngFor="let options of assessment.options; let i = index;">
+                                  <div class="form-check form-check-inline mr-1">
+                                      <input class="form-check-input" type="checkbox" name="checks.selected"
+                                          value="a" />
+                                      <label class="form-check-label">a) {{options.optionName}} </label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="assessment.questionType.questionTypeId == 3">
+                              <textarea id="textbox"></textarea>
+                          </div>
+                          <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 4">
+                              <div>
+                                  <select class="form-control">
+                                      <option selected>Select Answers</option>
+                                      <option *ngFor="let options of assessment.options; let i = index;"
+                                          value="{{options.optionName}}">{{options.optionName}}</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 5">
+                              <div>
 
-                                </div>
-                            </div>
-                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 6">
+                              </div>
+                          </div>
+                          <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 6">
 
-                            </div>
-                            <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 7">
-                                <div>
+                          </div>
+                          <div class="form-group" *ngIf="assessment.questionType.questionTypeId == 7">
+                              <div>
 
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2"></div>
-                            <div class="col-lg-8 col-md-8 buttons">
-                                <button class="btn btn-primary ">Previous</button>
-                                <button class="btn btn-success fa-pull-right">Next</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-2 col-md-2"></div>
+                          <div class="col-lg-8 col-md-8 buttons">
+                              <button class="btn btn-primary ">Previous</button>
+                              <button class="btn btn-success fa-pull-right">Next</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

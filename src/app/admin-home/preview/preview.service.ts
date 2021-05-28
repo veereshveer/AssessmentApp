@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PreviewService {
+
   private questionUrl = "http://localhost:8082/question/assessmentId/";
 
   constructor(private http: HttpClient) { }
