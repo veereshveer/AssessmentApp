@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserTestService } from './user-test.service';
 
 @Component({
   selector: 'app-user-test',
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class UserTestComponent implements OnInit {
  // name = "Angular " + VERSION.major;
  display: any;
- constructor() {
-   this.timer(1);
+ constructor(private previewService: UserTestService) {
+  let self = this;
 
-   let self = this;
-   // self.fetchAssessment();
+   self.timer(1);
+
+   self.fetchAssessment();
  }
 
 
@@ -38,13 +40,35 @@ export class UserTestComponent implements OnInit {
      if (seconds == 0) {
        console.log("finished");
        clearInterval(timer);
-       alert("hai veeresh");
-     }
+       this.submitTest();     }
    }, 1000);
  }
 
+ isQuestionCardShow: boolean = false;
+ dropdownList: any = [];
+ public assessments: any = [];
 
-  ngOnInit(): void {
-  }
+ fetchAssessment() {
+   let self = this;
+   self.previewService.getAssessment(103)
+     .subscribe((response) => {
+       console.log(response);
+       self.assessments = response;
+       for (let assessment of self.assessments) {
+         console.log(assessment.questions);
 
+         console.log(assessment.assessment.assessmentName);
+       }
+     }, (err) => {
+       console.log(err);
+     })
+ }
+
+ answerArray = [];
+
+ ngOnInit(): void {
+ }
+ submitTest(){
+   alert("timmer is Working");
+ }
 }
