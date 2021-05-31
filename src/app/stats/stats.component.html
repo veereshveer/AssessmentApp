@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-2">
+        <div class="col-lg-2">
+            <ul class = "navbar-nav">
+              <li class = "nav-item">
+                  <a routerLink="app-result" routerLinkActive="active" class="nav-link" >Assessment</a>
+              </li>
+              <li class = "nav-item">
+                <a routerLink="#" routerLinkActive="active" class="nav-link" >Summary</a>
+              </li>
+              <li class = "nav-item">
+                <a routerLink="#" routerLinkActive="active" class="nav-link" >Report</a>
+              </li>
+            
+            </ul>
+            </div>
+            <div class="col-lg-10">
+            
+            </div>
+    </div>
+    
+    <div class="col-lg-10"><br>
+        <h5 class="text-center"> Assessment Details</h5><br>
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th> Test_id</th>
+                <th> Start_date</th>
+                <th> End_date </th>
+                <th> Link </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor = "let assessments of assessmentdetails">
+                <td> {{ assessments.testId }} </td>
+                <td> {{ assessments.start_Date }} </td>
+                <td> {{ assessments.end_Date }} </td>
+                <td> <a href="assessments.link">{{ assessments.link }} </a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    
+</div>

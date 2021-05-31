@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+ 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ResultComponent } from './result/result.component';
+import { StatsComponent } from './stats/stats.component';
 
 
 
@@ -26,6 +27,7 @@ import { ResultComponent } from './result/result.component';
     UserRegistrationComponent,
     SettingsComponent,
     ResultComponent,
+    StatsComponent,
     
   ],
   imports: [

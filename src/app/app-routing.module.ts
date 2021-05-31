@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: 'preview',
     loadChildren: () => import('./admin-home/preview/preview.module').then(m => m.PreviewModule)  
   },
+  {
+    path: 'stats',
+    loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule)  
+  },
+  
 ];
 
 @NgModule({
