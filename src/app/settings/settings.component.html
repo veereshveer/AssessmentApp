@@ -1,1 +1,43 @@
-<p>settings works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" id="question-margin">
+                        <div class="card-body">
+                            <br>
+                            <label>Time for assesment :</label>
+                            <input type="text" id="text" [(ngModel)]="TestTime2" >
+                            <br>
+                            <br>
+                            <select class="button custom-select " (change)="loadAssessmentDetails($event)"
+                                name="listAssessmentName" [(ngModel)]="listAssessmentName" id="listAssessmentName">
+                                <option *ngFor="let assessment of assessments" value=" {{assessment.assessmentId}}">
+                                    {{assessment.assessmentName}}
+                                </option>
+                            </select>
+                            <br>
+                            <br>
+                            
+                            <div class="input-icons">
+                                <button class="btn btn-primary" (click)="settingLink()">Link</button>
+                                <i class="fas fa-copy"></i>
+                                <input type="text" style="width:15pc;" placeholder="link for the assessment" id="text" value={{Link}} disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card" id="question-margin">
+                <div class="card-body">
+                    <p><b>Test ID : {{listAssessmentName}}</b></p>
+                    <P><b>Link : </b>{{Link}} </P>
+                    <P><b>Link Expiry Time : </b>{{timer}}</P>
+                    <P><b>Test Time : {{TestTime1}}</b></P>
+                </div>
+            </div>
+        </div>
+       </div>
+    </div>
